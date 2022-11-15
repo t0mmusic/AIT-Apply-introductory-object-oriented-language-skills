@@ -9,10 +9,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 class AddOrders {
-	public static OrderDetails		orderArray[];
-	public static GenerateRandom	orderNum;
-	public static FileWriter		myWriter;
-	public static BufferedWriter	bw;
+	protected static OrderDetails	orderArray[];
+	protected static GenerateRandom	orderNum;
+	protected static FileWriter		myWriter;
+	protected static BufferedWriter	bw;
 
 	public static OrderDetails []removeElement(OrderDetails[] arr, int removedIdx) {
 		int	i = 0;
@@ -42,13 +42,13 @@ class AddOrders {
 			bw = new BufferedWriter(myWriter);
 			for (int i = 0; i < orderArray.length; i++)
 			{
-				bw.write(orderArray[i].dateOrder + ":"
-				+ orderArray[i].orderNum + ":"
-				+ orderArray[i].CustomerFirstName + ":"
-				+ orderArray[i].CustomerLastName + ":"
-				+ orderArray[i].PaymentMethod + ":"
-				+ orderArray[i].PartName + ":"
-				+ orderArray[i].pickedUp);
+				bw.write(orderArray[i].getdateOrder() + ":"
+				+ orderArray[i].getOrderNum() + ":"
+				+ orderArray[i].getCustomerFirstName() + ":"
+				+ orderArray[i].getCustomerLastName() + ":"
+				+ orderArray[i].getPaymentMethod() + ":"
+				+ orderArray[i].getPartName() + ":"
+				+ orderArray[i].getpickedUp());
 				bw.newLine();
 			}
 			bw.close();
@@ -100,7 +100,7 @@ class AddOrders {
 		order = sc.nextLine();
 		for (i = 0; i < orderArray.length; i++)
 		{
-			if (order.equals(orderArray[i].orderNum))
+			if (order.equals(orderArray[i].getOrderNum()))
 			{
 				tmpArray = updateArray(orderArray[i], tmpArray);
 				count++;
@@ -138,7 +138,8 @@ class AddOrders {
 			return ;
 		for (i = 0; i < orderArray.length; i++)
 		{
-			if (choice.orderNum.equals(orderArray[i].orderNum) && choice.dateOrder.equals(orderArray[i].dateOrder))
+			if (choice.getOrderNum().equals(orderArray[i].getOrderNum())
+				&& choice.getdateOrder().equals(orderArray[i].getdateOrder()))
 				break ;
 		}
 		System.out.println("Confirm Delete? y/n");
@@ -161,13 +162,13 @@ class AddOrders {
 			{
 				OrderDetails 		tmpDeets = new OrderDetails();
 				details = line.split(":");
-				tmpDeets.dateOrder = details[0];
-				tmpDeets.orderNum = details[1];
-				tmpDeets.CustomerFirstName = details[2];
-				tmpDeets.CustomerLastName = details[3];
-				tmpDeets.PaymentMethod = details[4];
-				tmpDeets.PartName = details[5];
-				tmpDeets.pickedUp = Boolean.parseBoolean(details[6]);
+				tmpDeets.setdateOrder(details[0]);
+				tmpDeets.setOrderNum(details[1]);
+				tmpDeets.setCustomerFirstName(details[2]);
+				tmpDeets.setCustomerLastName(details[3]);
+				tmpDeets.setPaymentMethod(details[4]);
+				tmpDeets.setPartName(details[5]);
+				tmpDeets.setpickedUp(Boolean.parseBoolean(details[6]));
 				orderArray = updateArray(tmpDeets, orderArray);
 			}
 			myReader.close();
@@ -216,13 +217,13 @@ class AddOrders {
 		try {
 			myWriter = new FileWriter("orders.txt", true);
 			bw = new BufferedWriter(myWriter);
-			bw.write(tmpDeets.dateOrder + ":"
-			+ tmpDeets.orderNum + ":"
-			+ tmpDeets.CustomerFirstName + ":"
-			+ tmpDeets.CustomerLastName + ":"
-			+ tmpDeets.PaymentMethod + ":"
-			+ tmpDeets.PartName + ":"
-			+ tmpDeets.pickedUp);
+			bw.write(tmpDeets.getdateOrder() + ":"
+			+ tmpDeets.getOrderNum() + ":"
+			+ tmpDeets.getCustomerFirstName() + ":"
+			+ tmpDeets.getCustomerLastName() + ":"
+			+ tmpDeets.getPaymentMethod() + ":"
+			+ tmpDeets.getPartName() + ":"
+			+ tmpDeets.getpickedUp());
 			bw.newLine();
 			bw.close();
 			myWriter.close();
@@ -305,7 +306,7 @@ class ModifyOrder extends AddOrders {
 				}
 				case "S":
 				{
-					choice.setpickedUp(!choice.pickedUp);
+					choice.setpickedUp(!choice.getpickedUp());
 					break ;
 				}
 				case "M":
@@ -327,7 +328,8 @@ class ModifyOrder extends AddOrders {
 
 			for (i = 0; i < orderArray.length; i++)
 			{
-				if (choice.orderNum.equals(orderArray[i].orderNum) && choice.dateOrder.equals(orderArray[i].dateOrder))
+				if (choice.getOrderNum().equals(orderArray[i].getOrderNum())
+					&& choice.getdateOrder().equals(orderArray[i].getdateOrder()))
 				{
 					orderArray[i] = choice;
 					break ;
@@ -350,9 +352,9 @@ class GenerateRandom extends AddOrders {
 
 		for (int i = 0; i < orderArray.length; i++)
 		{
-			if (currentDate.equals(orderArray[i].dateOrder))
+			if (currentDate.equals(orderArray[i].getdateOrder()))
 			{
-				if (orderNum == Integer.parseInt(orderArray[i].orderNum))
+				if (orderNum == Integer.parseInt(orderArray[i].getOrderNum()))
 				{
 					if (i + 1 == orderArray.length)
 					{
@@ -407,13 +409,13 @@ class ViewOrders extends AddOrders {
 		System.out.println("********************************************");
 		for (int i = 0; i < order.length; i++)
 		{
-			System.out.print(order[i].dateOrder + ", ");
-			System.out.print(order[i].orderNum + ", ");
-			System.out.print(order[i].CustomerFirstName + ", ");
-			System.out.print(order[i].CustomerLastName + ", ");
-			System.out.print(order[i].PaymentMethod + ", ");
-			System.out.print(order[i].PartName + ", ");
-			System.out.print(order[i].pickedUp + "\n");
+			System.out.print(order[i].getdateOrder() + ", ");
+			System.out.print(order[i].getOrderNum() + ", ");
+			System.out.print(order[i].getCustomerFirstName() + ", ");
+			System.out.print(order[i].getCustomerLastName() + ", ");
+			System.out.print(order[i].getPaymentMethod() + ", ");
+			System.out.print(order[i].getPartName() + ", ");
+			System.out.print(order[i].getpickedUp() + "\n");
 		}
 		System.out.println("********************************************");
 	}
@@ -421,13 +423,13 @@ class ViewOrders extends AddOrders {
 	public static void printDetails(OrderDetails order)
 	{
 		System.out.println("********************************************");
-		System.out.println("Order Date: " + order.dateOrder);
-		System.out.println("Order Number: " + order.orderNum);
-		System.out.println("Customer First Name: " + order.CustomerFirstName);
-		System.out.println("Customer Last Name: " + order.CustomerLastName);
-		System.out.println("Payment Method: " + order.PaymentMethod);
-		System.out.println("Part Name: " + order.PartName);
-		System.out.println("Picked Up: " + order.pickedUp);
+		System.out.println("Order Date: " + order.getdateOrder());
+		System.out.println("Order Number: " + order.getOrderNum());
+		System.out.println("Customer First Name: " + order.getCustomerFirstName());
+		System.out.println("Customer Last Name: " + order.getCustomerLastName());
+		System.out.println("Payment Method: " + order.getPaymentMethod());
+		System.out.println("Part Name: " + order.getPartName());
+		System.out.println("Picked Up: " + order.getpickedUp());
 		System.out.println("********************************************");
 	}
 
@@ -436,7 +438,7 @@ class ViewOrders extends AddOrders {
 
 		for (int i = 0; i < orderArray.length; i++)
 		{
-			if (orderArray[i].orderNum.equals(orderNum))
+			if (orderArray[i].getOrderNum().equals(orderNum))
 			{
 				printDetails(orderArray[i]);
 				flag = true;
@@ -459,13 +461,13 @@ class ViewOrders extends AddOrders {
 }
 
 class OrderDetails extends AddOrders {
-	String	orderNum;
-	String	CustomerFirstName;
-	String	CustomerLastName;
-	String	PartName;
-	String	PaymentMethod;
-	String	dateOrder;
-	boolean	pickedUp;
+	private String	orderNum;
+	private String	CustomerFirstName;
+	private String	CustomerLastName;
+	private String	PartName;
+	private String	PaymentMethod;
+	private String	dateOrder;
+	private boolean	pickedUp;
 
 	public boolean forbiddenChar( String input )
 	{
@@ -476,6 +478,8 @@ class OrderDetails extends AddOrders {
 		}
 		return (true);
 	}
+
+	/* setters no paramater */
 
 	public void setOrderNum( ){
 		boolean genuine = false;
@@ -537,13 +541,69 @@ class OrderDetails extends AddOrders {
 		this.PaymentMethod = set;
 	}
 
-	public void setpickedUp( boolean picked ){
-		this.pickedUp = picked;
-	}
-
 	public void setdateOrder( ){
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 		LocalDateTime now = LocalDateTime.now();
 		this.dateOrder = dtf.format(now);
+	}
+
+	/* setters with paramater */
+
+	public void setOrderNum( String orderNum ){
+		this.orderNum = orderNum;
+	}
+
+	public void setCustomerFirstName( String firstName ){
+		this.CustomerFirstName = firstName;
+	}
+
+	public void setCustomerLastName( String lastName ){
+		this.CustomerLastName = lastName;
+	}
+
+	public void setPartName( String partName ){
+		this.PartName = partName;
+	}
+
+	public void setPaymentMethod( String paymentMethod ){
+		this.PaymentMethod = paymentMethod;
+	}
+
+	public void setpickedUp( boolean picked ){
+		this.pickedUp = picked;
+	}
+
+	public void setdateOrder( String dateOrder ){
+		this.dateOrder = dateOrder;
+	}
+
+	/* Getters */
+
+	public String getOrderNum( ){
+		return (this.orderNum);
+	}
+
+	public String getCustomerFirstName( ){
+		return (this.CustomerFirstName);
+	}
+
+	public String getCustomerLastName( ){
+		return (this.CustomerLastName);
+	}
+
+	public String getPartName( ){
+		return (this.PartName);
+	}
+
+	public String getPaymentMethod( ){
+		return (this.PaymentMethod);
+	}
+
+	public String getdateOrder( ){
+		return (this.dateOrder);
+	}
+
+	public boolean getpickedUp( ){
+		return (this.pickedUp);
 	}
 }
