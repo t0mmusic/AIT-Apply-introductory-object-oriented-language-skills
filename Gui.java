@@ -1,36 +1,37 @@
 import javax.swing.*;
-
 import java.awt.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-class Gui extends OrderDetails {
+/* Gui class for running the application. */
+abstract class Gui extends OrderDetails {
 
 	private static JFrame			frame = new JFrame("Spare Parts Store");
 	private static JPanel			addPanel = new JPanel();
 	private static JPanel			lowerPanel = new JPanel();
 	private static JPanel			buttonPanel = new JPanel();
 	private static JLabel			info = new JLabel();
-	private static GridLayout 		menuLayout = new GridLayout(13,1);
-	private static GridLayout 		listLayout = new GridLayout(1,1);
-	private static GridLayout 		buttonLayout = new GridLayout(1,3);
 	private static JLabel			fNameLabel = new JLabel("Enter First Name");
 	private static JLabel			lNameLabel = new JLabel("Enter Last Name");
 	private static JLabel			pNameLabel = new JLabel("Enter Part Name");
 	private static JLabel			pMethodLabel = new JLabel("Enter Payment Method");
 	private static JLabel			title = new JLabel("Fill in the fields below or select an order from the list.");
+	private static JButton			addButton = new JButton("Add new order");
+	private static JButton			removeButton = new JButton("Delete order");
+	private static JButton			modifyButton = new JButton("Modify order");
+	private static GridLayout 		menuLayout = new GridLayout(13,1);
+	private static GridLayout 		listLayout = new GridLayout(1,1);
+	private static GridLayout 		buttonLayout = new GridLayout(1,3);
 	private static JTextField		firstName = new JTextField(null);
 	private static JTextField		lastName = new JTextField(null);
 	private static JTextField		partName = new JTextField(null);
 	private static JTextField		paymentMethod = new JTextField(null);
+	private static JScrollPane		scrollableList;
 	private static JRadioButton		genuinePart = new JRadioButton("Genuine Part");
 	private static JRadioButton		pickedUp = new JRadioButton("Picked Up");
-	private static JButton			addButton = new JButton("Add new order");
-	private static JButton			removeButton = new JButton("Delete order");
-	private static JButton			modifyButton = new JButton("Modify order");
 	private static JList<String>	orderList;
-	private static JScrollPane		scrollableList;
 
+	/* Converts orderArray into an Array of strings. */
 	public static String []orderToStrings( )
 	{
 		if (orderArray == null)
@@ -43,6 +44,7 @@ class Gui extends OrderDetails {
 		return (orders);
 	}
 
+	/* Converts an OrderDetails object into a string. */
 	public static String orderToString(OrderDetails order)
 	{
 		return (order.getdateOrder() + " : " +
@@ -54,6 +56,7 @@ class Gui extends OrderDetails {
 			order.getpickedUp());
 	}
 
+	/* Adds a new order to the gui program. */
 	public static void	addOrder( ) {
 		Boolean			genuine = false;
 
@@ -82,6 +85,7 @@ class Gui extends OrderDetails {
 
 	}
 
+	/* Modifies an order when user selects modify gui option. */
 	public static OrderDetails ModifyOrder(OrderDetails order) {
 		order.setCustomerFirstName(firstName.getText());
 		order.setCustomerLastName(lastName.getText());
@@ -91,6 +95,7 @@ class Gui extends OrderDetails {
 		return (order);
 	}
 
+	/* Updates the clickable list of orders in the gui application. */
 	public static JList<String> updateScroll(boolean first) {
 		if (orderArray == null)
 		{
@@ -128,6 +133,7 @@ class Gui extends OrderDetails {
 		return (orderList);
 	}
 
+	/* adds gui elements to the program on load. */
 	public static JList<String> updateGui( ) {
 		if (orderArray == null)
 		{
@@ -163,6 +169,11 @@ class Gui extends OrderDetails {
 		return (orderList);
 	}
 
+	/* Adds event listeners for the gui buttons
+	 * add order
+	 * remove order
+	 * modify order
+	 */
 	public static void viewModify( ) {
 		addButton.addActionListener(e ->
 		{
@@ -210,11 +221,11 @@ class Gui extends OrderDetails {
 		
 	}
 
+	/* Initialises gui program. */
 	public static void main(String args[]){
 		PartsDatabase.importData();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(500,600);
-		frame.setVisible(true);
 		updateGui();
 		viewModify();
 	}

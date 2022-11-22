@@ -2,13 +2,17 @@ import java.util.*;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
-class PartsMenu {
+/* PartsMenu class is the base class for the program. Other classes will use the
+ * protected class members from here.
+ */
+abstract class PartsMenu {
 	protected static OrderDetails	orderArray[];
 	protected static GenerateRandom	orderNum;
 	protected static FileWriter		myWriter;
 	protected static BufferedWriter	bw;
 	protected static Scanner 		sc = new Scanner(System.in);
 
+	/* Menu selection method for the command line program. */
 	public static OrderDetails chooseOrder( OrderDetails tmpArray[] )
 	{
 		OrderDetails	choice = null;
@@ -32,6 +36,9 @@ class PartsMenu {
 		return (tmpArray[selInt]);
 	}
 
+	/* Updates the array of Objects containing information about each order.
+	 * If the array doesn't exist, it will create it first.
+	 */
 	public static OrderDetails []updateArray(OrderDetails order, OrderDetails orderArr[])
 	{
 		if (orderArr == null)
@@ -52,7 +59,7 @@ class PartsMenu {
 		return (orderArr);
 	}
 
-
+	/* Main for the command line program. */
 	public static void main(String args[]) {
 		String	Exit;
 

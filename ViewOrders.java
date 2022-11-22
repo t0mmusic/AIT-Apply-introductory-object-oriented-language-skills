@@ -1,5 +1,7 @@
-class ViewOrders extends PartsMenu {
+/* Display functionality for program. */
+abstract class ViewOrders extends PartsMenu {
 	
+	/* Ensures database is not empty before printing all orders. */
 	public static void printAll()
 	{
 		if (orderArray == null)
@@ -10,6 +12,7 @@ class ViewOrders extends PartsMenu {
 		printDetails(orderArray);
 	}
 
+	/* Prints details of all orders in database. */
 	public static void printDetails(OrderDetails order[])
 	{
 		System.out.println("********************************************");
@@ -26,6 +29,7 @@ class ViewOrders extends PartsMenu {
 		System.out.println("********************************************");
 	}
 
+	/* Prints all details of a single order. */
 	public static void printDetails(OrderDetails order)
 	{
 		System.out.println("********************************************");
@@ -39,6 +43,7 @@ class ViewOrders extends PartsMenu {
 		System.out.println("********************************************");
 	}
 
+	/* Searches database for matching orderNum. */
 	public static void findOrder( String orderNum ) {
 		boolean flag = false;
 
@@ -54,6 +59,7 @@ class ViewOrders extends PartsMenu {
 			System.out.println("There is no order matching the input details.");
 	}
 	
+	/* Checks if array is empty before searching orders. */
 	public static void searchOrder()
 	{
 		if (orderArray == null)

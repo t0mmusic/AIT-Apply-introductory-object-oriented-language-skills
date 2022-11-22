@@ -1,5 +1,7 @@
-class DeleteOrders extends PartsMenu {
+/* Removes orders from array and database. */
+abstract class DeleteOrders extends PartsMenu {
 
+	/* Allows the user of the command line program to delete an order. */
 	public static void deleteData()
 	{
 		OrderDetails choice = ModifyOrder.compareArrays();
@@ -21,6 +23,7 @@ class DeleteOrders extends PartsMenu {
 		}
 	}
 
+	/* Removes an object from orderArray using the index of the array. */
 	public static OrderDetails []removeElement(OrderDetails[] arr, int removedIdx) {
 		int	i = 0;
 		int	j = 0;

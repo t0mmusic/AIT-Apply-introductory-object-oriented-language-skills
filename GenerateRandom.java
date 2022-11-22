@@ -2,8 +2,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.util.*;
 
-class GenerateRandom extends PartsMenu {	
+/* Generates random numbers. */
+abstract class GenerateRandom extends PartsMenu {	
 
+	/* Checks to see if the randomly generated number has already been used
+	 * in that same day.
+	 */
 	public static boolean checkUnused(int orderNum)
 	{
 		if (orderArray == null)
@@ -30,6 +34,9 @@ class GenerateRandom extends PartsMenu {
 		return (true);
 	}
 	
+	/* Generates a random 6 digit number. If genuine is true, it will begin
+	 * with a 1. Otherwise it will start with anything but 1.
+	 */
 	public static int getRandomOrderNum(boolean genuine)
 	{
 		Random	rand = new Random();

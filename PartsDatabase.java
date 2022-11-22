@@ -5,8 +5,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-class PartsDatabase extends PartsMenu {
+/* class to import and export from database. */
+abstract class PartsDatabase extends PartsMenu {
 
+	/* Exports data from orderArray into the text file. */
 	public static void exportData()
 	{
 		try {
@@ -37,6 +39,7 @@ class PartsDatabase extends PartsMenu {
 		}
 	}
 
+	/* Imports data from the text file to fill orderArray. */
 	public static void importData()
 	{
 		BufferedReader 		myReader = null;
@@ -69,6 +72,9 @@ class PartsDatabase extends PartsMenu {
 		}
 	}
 
+	/* The database text file is erased and updated with the new information added.
+	 * It is populated using the orderArray array of objects.
+	 */
 	public static void updateDatabase(OrderDetails tmpDeets)
 	{
 		try {

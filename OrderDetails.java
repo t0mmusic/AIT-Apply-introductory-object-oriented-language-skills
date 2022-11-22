@@ -1,6 +1,10 @@
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
+/* This class allows creation of OrderDetails objects which will be used to store the
+ * details of customer orders. Uses a default and overloaded constructor, as well as
+ * getters and setters to access the private class members.
+ */
 class OrderDetails extends PartsMenu {
 	private String	orderNum;
 	private String	CustomerFirstName;

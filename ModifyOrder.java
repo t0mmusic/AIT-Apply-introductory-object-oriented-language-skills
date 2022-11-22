@@ -1,4 +1,5 @@
-class ModifyOrder extends PartsMenu {
+/* Allows user to modify existing orders. */
+abstract class ModifyOrder extends PartsMenu {
 
 	public static boolean addOrder(OrderDetails order)
 	{
@@ -15,6 +16,11 @@ class ModifyOrder extends PartsMenu {
 
 	}
 
+	/* Compares an order ID to the database to see if it exists.
+	 * If it does, it will check to see if there are two orders
+	 * with the same ID from different dates and ask the user which
+	 * of these they would like to select.
+	 */
 	public static OrderDetails compareArrays()
 	{
 		String			order;
@@ -61,6 +67,7 @@ class ModifyOrder extends PartsMenu {
 		return (choice);
 	}
 
+	/* Allows user to add a new order. */
 	public static OrderDetails addOrder()
 	{
 		OrderDetails 	tmpDeets = new OrderDetails();
@@ -76,6 +83,7 @@ class ModifyOrder extends PartsMenu {
 		return (tmpDeets);
 	}
 
+	/* Allows user to edit an order. */
 	public static void modifyOrders( )
 	{
 		OrderDetails	choice = compareArrays();
